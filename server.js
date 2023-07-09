@@ -140,14 +140,19 @@ app.get('/', (req, res) => {
     return res.status(200).json({ success: true, data: 'Home' })
 })
 
-app.use(express.static(path.join(__dirname, "./client/build")))
-app.get("*", function (_, res){
-    res.sendFile(
-        path.join(__dirname, "./client/build/index.html"),
-        function (err){
-            res.status(500).send(err);
-        }
-    );
-});
+// app.use(express.static(path.join(__dirname, "./client/build")))
+// app.get("*", function (_, res){
+//     res.sendFile(
+//         path.join(__dirname, "./client/build/index.html"),
+//         function (err){
+//             res.status(500).send(err);
+//         }
+//     );
+// });
+
+app.use(express.static(path.join(__dirname, './client/build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+})
 
 app.listen(PORT, console.log(`Server isl istening on port: http://localhost:${PORT}`))
